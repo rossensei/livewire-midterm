@@ -57,9 +57,13 @@
                         </select>
                     </div>
                     <button wire:click="clear" class="w-full bg-blue-500 text-center text-sm text-white rounded-lg py-2 hover:bg-blue-400">Reset Filter</button>
+                    <button wire:click="logout" class="w-full bg-gray-500 text-center text-sm text-white rounded-lg py-2 hover:bg-gray-400 mt-5"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</button>
                 </div>
             </div>
             <div class="basis-4/5 h-screen p-14">
+                <div class="w-full flex flex-row-reverse mb-5">
+                    <a href="{{ url('/' . $user->username) }}" class="text-white text-sm">My Profile</a>
+                </div>
                 <div class="flex justify-between items-center">
                     <h1 class="text-xl text-gray-50">List of Bands</h1>
                     <a href="{{ url('/add-band') }}" class="px-3 py-1 bg-neutral-700 rounded-lg text-white hover:bg-neutral-500">Add band</a>

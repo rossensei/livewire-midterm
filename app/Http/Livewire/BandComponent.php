@@ -11,6 +11,11 @@ class BandComponent extends Component
     use WithPagination;
     public $bandname, $description, $genre, $location, $rate, $bandphoto, $band_id;
     public $search, $rock, $pop, $reggae, $acoustic, $classical, $locationSelect, $rateRange, $sortDirection, $selectedGenres = [];
+    public $user;
+
+    public function mount() {
+        $this->user = auth()->user();
+    }
 
     public function render()
     {
@@ -98,7 +103,11 @@ class BandComponent extends Component
             'sortDirection',
             'selectedGenres',
         ]);
-        // $this->reset(['bandname', 'genre']);
     }
 
+    public function logout() {
+        auth()->logout();
+
+        return redirect('/login');
+    }
 }

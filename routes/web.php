@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\BandComponent;
 use App\Http\Livewire\CreateComponent;
 use App\Http\Livewire\EditComponent;
+use App\Http\Livewire\LoginComponent;
+use App\Http\Livewire\RegisterComponent;
+use App\Http\Livewire\UserProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +19,15 @@ use App\Http\Livewire\EditComponent;
 |
 */
 
-Route::get('/', BandComponent::class)->name('band-component');
-Route::get('/add-band', CreateComponent::class);
-Route::get('/band/edit/{id}', EditComponent::class);
+// Route::get('/', LoginComponent::class)->name('login');
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('/login', LoginComponent::class)->name('login');
+    Route::get('/register', RegisterComponent::class)->name('register');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', BandComponent::class)->name('band-component');
+    Route::get('/{user}', UserProfile::class);
+    Route::get('/add-band', CreateComponent::class);
+    Route::get('/band/edit/{id}', EditComponent::class);
+});
